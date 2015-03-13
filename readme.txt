@@ -1,4 +1,4 @@
-#=== Multisite Shared Menu ===
+=== Multisite Shared Menu ===
 Contributors: ben.greeley
 Tags: menus, multisite, navigation
 Requires at least: 3.0.1
@@ -7,7 +7,7 @@ Stable tag: 1.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Use navigation menus from other sites to achieve a universal or common navigation area.
+Use a navigation menu from another multisite blog on the same network to achieve a universal common navigation area.
 
 == Description ==
 Allows users in a WordPress multisite network pull in a menu from another site in order to achieve a universal navigation or shared navigation without needing to manually recreate menus. 
