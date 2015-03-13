@@ -16,7 +16,7 @@ Plugin is intended for WordPress Multisite environment for plugin to function pr
 
 == Installation ==
 1. Copy the folder into your /wp-content/plugins directory.
-1. Activate for the sites you wish to use plugin on. 
+1. Activate for the sites you wish to use plugin on. NOTE: Should not be activated on master menu site. 
 1. Once activated, set up a menu to use as a “master”. 
 1. To use this menu on other sites, browse to the site you wish to use the menu on. 
 1. Navigate to ‘Shared Menu Settings’ under the ‘Appearance’ menu. 

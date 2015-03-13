@@ -46,4 +46,8 @@ register_deactivation_hook( __FILE__, 'deactivate_menufromsite' );
 
 require plugin_dir_path( __FILE__) . 'inc/class-menufromsite.php';
 
-new MasterSharedMenu();
+if( is_multisite() ) {
+	// Only run this menu if in multisite...
+	new MasterSharedMenu();
+	
+}
