@@ -1,7 +1,8 @@
 <div class="wrap">
 			
 	<h2>Multisite Shared Menu Settings</h2>
-	<p>Select the source site and source menu that will be used in the same menu location.</p>
+	<p>Select the source site that will be used for the selected menu location(s).</p>
+	<p>Please Note: Use the same theme on each site to ensure menu location compatibility.</p>
 		
 	<form method="post" action="options.php">	    
 		<table class="form-table">
@@ -12,7 +13,7 @@
 			
 			// Output dropdown menu of available sites...
 			$blogList = wp_get_sites();
-			
+
 			echo '<tr>
 					<th scope="row"><label for="mfs_override_site_id">Source Site:</label></th>';
 			
@@ -21,7 +22,6 @@
 			
 			
 			echo '<option value="">-- Select --</option>';
-			
 			foreach( $blogList as $blogTemp ) {
 				if( $blogTemp['blog_id'] != get_current_blog_id() ) {
 					
@@ -31,7 +31,7 @@
 						echo ' selected ';
 					}
 					
-					echo '>'.$blogTemp['path'].'</option>';
+					echo '>'.$blogTemp['domain']. $blogTemp['path'].'</option>';
 					
 				}
 			}
@@ -48,22 +48,27 @@
 			
 			$locations = get_registered_nav_menus();
 			$locationKeys = array_keys( $locations );
+			$menuLocation = get_option('mfs_override_menu_location');
 			
+			if( !is_array( $menuLocation ) ) {
+				$menuLocation = array( $menuLocation );	// backwards-compatibility from previous version
+			}
+
 			if( count($locations) ) {
-				echo '<select value="" name="mfs_override_menu_location" id="mfs_override_menu_location">';
-				echo '<option value="">-- Select --</option>';
+				
+				$option_count = 1;
 				
 				foreach ($locationKeys as $curLocation ) {
-					if ( esc_attr( get_option('mfs_override_menu_location') ) == $curLocation ) {
-						$selected = true;
+					if ( in_array ( $curLocation, $menuLocation ) ) {
+						$checked = true;
 					}
 					else {
-						$selected = false;
+						$checked = false;
 					}
 					
-					echo '<option value="'. $curLocation .'"' . ($selected === true ? ' selected ' : '' ) . '>' . $curLocation . '</option>';
+					echo '<input type="checkbox" id="mfs_override_menu_location['.$option_count.']" name="mfs_override_menu_location['.$option_count.']" value="'. $curLocation .'"' . ($checked == true ? ' checked="checked" ' : '' ) . '><label for="mfs_override_menu_location['.$option_count.']">' . $curLocation . '</label><br/>';
+					$option_count++;
 				}
-				echo '</select>';
 			}
 			else {
 				// No menu locations
